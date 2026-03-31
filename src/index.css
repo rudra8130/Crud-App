@@ -1,0 +1,50 @@
+.searchbar{
+  justify-self: center;
+  max-height: 50px;
+  margin: 50px;
+  width: 70%;
+}
+.Employeetable{
+  justify-self: center;
+  max-width: 70%;
+  margin: 25px;
+}
+.edit{
+  margin: 3px;
+}
+.Addemp{
+  margin: 3px;
+  min-width: 90px;
+}
+.blur-bg1 {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f")
+    no-repeat center center/cover;
+}
+
+.glass-card1 {
+  width: 400px;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+.form-control {
+  background: rgba(255,255,255,0.7);
+  border: none;
+}
+.glass-card {
+  width: 380px;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+.blur-bg {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1508780709619-79562169bc64")
+    no-repeat center center/cover;
+}
+
