@@ -2,38 +2,50 @@ import { useState } from "react";
 import api from "./api";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const Signup = () => {
   const navigate = useNavigate();
+  const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handellogin = async (e) => {
+  const handelsignup = async (e) => {
     e.preventDefault();
     try {
-      const formdata = new FormData();
-      formdata.append("username", email);
-      formdata.append("password", password);
-
-      const response = await api.post("/login", formdata);
+      const response = await api.post("/user", {
+        name: name,
+        email: email,
+        password: password,
+      });
       const token = response.data.access_token;
 
       localStorage.setItem("token", token);
-      alert("Login Successful!");
+      alert("SignUp Successful!");
       navigate("/");
     } catch (error) {
       console.log(error);
       console.log(error.response);
-      alert(error.response?.data?.detail || "Login Failed!");
+      alert(error.response?.data?.detail || "SignUp Failed!");
     }
   };
   return (
     <div className="blur-bg d-flex justify-content-center align-items-center">
       <div className="card glass-card p-4">
-        <h3 className="text-center mb-4">Sign In</h3>
+        <h3 className="text-center mb-4">Sign Up</h3>
 
-        <form onSubmit={handellogin}>
+        <form onSubmit={handelsignup}>
+          <div className="mb-3">
+            <label className="form-label">Enter Name</label>
+            <input
+              type="name"
+              className="form-control"
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+              placeholder="Enter your name"
+              required
+            />
+          </div>
           {/* Email */}
           <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label">Enter Email</label>
             <input
               type="email"
               className="form-control"
@@ -46,7 +58,7 @@ const SignIn = () => {
 
           {/* Password */}
           <div className="mb-3">
-            <label className="form-label">Password</label>
+            <label className="form-label">Create Password</label>
             <input
               type="password"
               value={password}
@@ -57,28 +69,16 @@ const SignIn = () => {
             />
           </div>
 
-          {/* Remember + Forgot */}
-          <div className="d-flex justify-content-between mb-3">
-            <div>
-              <input type="checkbox" className="form-check-input me-2" />
-              <label className="form-check-label">Remember me</label>
-            </div>
-
-            <a href="#" className="text-decoration-none">
-              Forgot Password?
-            </a>
-          </div>
-
           {/* Button */}
           <button type="submit" className="btn btn-primary w-100">
-            Sign In
+            Sign Up
           </button>
 
           {/* Signup link */}
           <p className="text-center mt-3 mb-0">
-            Don't have an account?{" "}
-            <a href="/signup" className="text-decoration-none fw-bold">
-              Sign Up
+            Already have a account?{" "}
+            <a href="/signin" className="text-decoration-none fw-bold">
+              SignIn
             </a>
           </p>
         </form>
@@ -86,4 +86,4 @@ const SignIn = () => {
     </div>
   );
 };
-export default SignIn;
+export default Signup;

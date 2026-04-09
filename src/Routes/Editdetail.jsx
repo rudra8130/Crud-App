@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../Store/userslice";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "./api";
 
 const Editdetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const Editdetail = () => {
     return <h2>Loading...</h2>;
   }
 
-  const handleedit = (e) => {
+  const handleedit = async (e) => {
     e.preventDefault();
     const newuserdetails = {
       id: Number(refid.current.value),
@@ -27,8 +28,30 @@ const Editdetail = () => {
       email: refemail.current.value,
       phone: refphone.current.value,
     };
-    dispatch(userActions.edituser(newuserdetails));
-    navigate("/");
+    try {
+      const token = localStorage.getItem("token");
+      await api.put(
+        `/Emp/${id}`,
+        {
+          id: Number(newuserdetails.id),
+          name: newuserdetails.name,
+          email: newuserdetails.email,
+          phone: newuserdetails.phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      dispatch(userActions.edituser(newuserdetails));
+      navigate("/");
+      alert("Updated Successfully");
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      alert(error.response?.data?.detail || "Updation Failed!");
+    }
   };
   return (
     <div className="blur-bg d-flex justify-content-center align-items-center">

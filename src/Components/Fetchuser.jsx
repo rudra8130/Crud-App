@@ -7,8 +7,17 @@ const Fetchuser = () => {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-    fetch("https://jsonplaceholder.typicode.com/users", { signal })
-      .then((res) => res.json())
+    const token = localStorage.getItem("token");
+    fetch("http://127.0.0.1:8000/Emp/", {
+      signal,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Unauthorized");
+        return res.json();
+      })
       .then((user) => {
         dispatch(userActions.addUsers(user));
       }, []);

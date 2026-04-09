@@ -9,6 +9,7 @@ import { store } from "./Store/store.js";
 import AddEmployee from "./Routes/AddEmployee.jsx";
 import SignIn from "./Routes/SignIn.jsx";
 import Editdetail from "./Routes/Editdetail.jsx";
+import Signup from "./Routes/Signup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/addemployee", element: <AddEmployee /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "/signup", element: <Signup /> },
       { path: "/edit/:id", element: <Editdetail /> },
     ],
   },

@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import EmployeeTable from "../Components/Employee-table";
 import SearchBar from "../Components/SearchBar";
 

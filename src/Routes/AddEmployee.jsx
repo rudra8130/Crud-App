@@ -2,16 +2,16 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../Store/userslice";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
 const AddEmployee = () => {
   const refid = useRef();
   const refname = useRef();
   const refemail = useRef();
   const refphone = useRef();
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  const handlesubmit = (e) => {
+  const navigate = useNavigate();
+  const handlesubmit = async (e) => {
     e.preventDefault();
     const user = [
       {
@@ -21,9 +21,31 @@ const AddEmployee = () => {
         phone: refphone.current.value,
       },
     ];
-    console.log(user);
-    dispatch(userActions.addUsers(user));
-    navigate("/");
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await api.post(
+        "/Emp",
+        {
+          id: user[0].id,
+          name: user[0].name,
+          email: user[0].email,
+          phone: user[0].phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      localStorage.setItem("token", token);
+      alert("Emp added succesfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      alert(error.response?.data?.detail || "Adding Failed!");
+    }
   };
 
   return (
