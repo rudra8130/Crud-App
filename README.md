@@ -14,7 +14,7 @@ The application is built using a React frontend and a FastAPI backend, with SQLi
 Secure Login system using JWT tokens
 Protected API routes (only authenticated users can access data)
 
-🏠 Dashboard
+🏠 Dashboard hhhh
 
 Displays all employee records in a structured format
 Real-time data fetched from backend APIs
