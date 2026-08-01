@@ -6,6 +6,9 @@ The application is built using a React frontend and a FastAPI backend, with SQLi
 
 🚀 Features
 
+
+
+
 🔐 Authentication System
 
 Secure Login system using JWT tokens
